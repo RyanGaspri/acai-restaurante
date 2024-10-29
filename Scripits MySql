@@ -1,0 +1,31 @@
+CREATE DATABASE acai_restaurante;
+
+USE acai_restaurante;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE pedidos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT,
+    itemId INT,
+    status ENUM('em preparo', 'retirar', 'entregue') DEFAULT 'em preparo',
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userId) REFERENCES users(id),
+    FOREIGN KEY (itemId) REFERENCES items(id)
+);
+
+select * from users;
+
+select * from pedidos;
+
+select * from items;
